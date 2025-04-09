@@ -1,90 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <title>칭찬왕 룰렛 이벤트</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding: 40px;
-      background-color: #f8fafc;
-    }
-    .card {
-      max-width: 500px;
-      margin: auto;
-      padding: 20px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .result {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    .button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #3b82f6;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .button:disabled {
-      background-color: #9ca3af;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>🎡 칭찬왕 룰렛 이벤트</h1>
-    <p id="description">룰렛을 돌려 선물을 확인하세요!</p>
-    <button id="spinBtn" class="button" onclick="spinRoulette()">돌리기 🎯</button>
-    <div id="result" class="result"></div>
-  </div>
-
-  <script>
-    const prizes = [
-      { name: "☕ 스타벅스 쿠폰", weight: 25 },
-      { name: "🧁 디저트 세트", weight: 20 },
-      { name: "🏖️ 반반반차", weight: 15 },
-      { name: "🍱 피플런치", weight: 20 },
-      { name: "🎁 기타 1", weight: 10 },
-      { name: "🎊 기타 2", weight: 10 }
-    ];
-
-    function getWeightedRandomPrize() {
-      const totalWeight = prizes.reduce((acc, cur) => acc + cur.weight, 0);
-      const randomNum = Math.random() * totalWeight;
-      let sum = 0;
-      for (const prize of prizes) {
-        sum += prize.weight;
-        if (randomNum <= sum) return prize.name;
-      }
-      return prizes[0].name;
-    }
-
-    function spinRoulette() {
-      const prize = getWeightedRandomPrize();
-      document.getElementById("result").innerHTML = `🐋 짠!<br>축하합니다! 당신의 선물은...<br><br><span style='font-size:1.8rem'>${prize}</span>`;
-      document.getElementById("spinBtn").disabled = true;
-
-      fetch("https://script.google.com/macros/s/AKfycbw4IK5VE3rlYTZuD-lPW9y9hkGFMujD0KCdM8_Z5VR8BOwS7_ItojtBHWXSlMr2xBCKuA/exec", {
-        method: "POST",
-        body: JSON.stringify({ prize }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(() => {
-        console.log("기록 완료");
-      }).catch(err => {
-        console.error("기록 실패", err);
-      });
-    }
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>칭찬왕 룰렛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
